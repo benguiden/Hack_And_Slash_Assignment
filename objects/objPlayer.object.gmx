@@ -28,8 +28,10 @@
             <string>///Variables
 
 //Movement
-velocityMax = 2;
 velocity = 0;
+velocityIn = 0;
+velocityMax = 2;
+acceleration = 0.25;
 dir = 0;
 </string>
           </argument>
@@ -93,8 +95,11 @@ dir = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x += 2 * velocity * cos(dir);
-y += 2 * velocity * -sin(dir);
+            <string>///Player Movement
+PlayerMovement(velocity, velocityIn, velocityMax, acceleration);
+
+x += velocity * cos(dir);
+y += velocity * -sin(dir);
 </string>
           </argument>
         </arguments>
@@ -122,14 +127,12 @@ y += 2 * velocity * -sin(dir);
 draw_set_color(c_blue);
 draw_circle(x, y, 8, false);
 draw_set_color(c_black);
-draw_line(x, y, x+(4 * velocity*cos(dir)), y+(4 * velocity*-sin(dir)));
+draw_line_width(x, y, x+(8 *cos(dir)), y+(8 *-sin(dir)), 3);
 
 //Joystick
 if (joystick_exists(1)){
-    draw_text(16, 16, "xpos = " + string(global.joyX));
-    draw_text(16, 32, "ypos = " + string(global.joyY));
-    draw_text(16, 48, "velocity = " + string(velocity));
-    draw_text(16, 64, "direction = " + string(dir));
+    draw_text(16, 16, "velocity = " + string(velocity));
+    draw_text(16, 32, "direction = " + string(dir));
 }
 </string>
           </argument>

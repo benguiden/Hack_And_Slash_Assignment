@@ -11,6 +11,7 @@
   <scripts name="scripts">
     <script>scripts\JoystickMovement.gml</script>
     <script>scripts\JoystickInput.gml</script>
+    <script>scripts\PlayerMovement.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\objPlayer</object>
