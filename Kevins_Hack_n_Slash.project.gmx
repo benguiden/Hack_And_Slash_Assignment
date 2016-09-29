@@ -8,6 +8,17 @@
   <sprites name="sprites"/>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\JoystickMovement.gml</script>
+    <script>scripts\JoystickInput.gml</script>
+  </scripts>
+  <objects name="objects">
+    <object>objects\objPlayer</object>
+    <object>objects\objControls</object>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\rmTest</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>
