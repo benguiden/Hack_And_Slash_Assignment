@@ -33,6 +33,8 @@ velocityIn = 0;
 velocityMax = 2;
 acceleration = 0.25;
 dir = 0;
+dirIn = 0;
+dirAccel = 0.1;
 </string>
           </argument>
         </arguments>
@@ -133,6 +135,7 @@ draw_line_width(x, y, x+(8 *cos(dir)), y+(8 *-sin(dir)), 3);
 if (joystick_exists(1)){
     draw_text(16, 16, "velocity = " + string(velocity));
     draw_text(16, 32, "direction = " + string(dir));
+    draw_text(16, 48, "direction In = " + string(dirIn));
 }
 </string>
           </argument>

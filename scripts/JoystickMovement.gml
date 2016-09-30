@@ -1,7 +1,8 @@
 #define JoystickMovement
 ///This script will get the input from the joystick's left analog stick's input and change the players variables
-dir = JoystickDirection();
-velocityIn = JoystickMagnitude(dir);
+dirIn = JoystickDirection();
+if (dirIn >= 2 * pi) dirIn = 0;
+velocityIn = JoystickMagnitude(dirIn);
 
 #define JoystickMagnitude
 theta = argument0;
@@ -22,15 +23,15 @@ if (_x != 0){
     }else if ((_x < 0) && (_y < 0)){
         return pi + arctan( ( -_y ) / ( _x ) );
     }else if ((_x < 0) && (_y >= 0)){
-        return -pi + arctan( ( -_y ) / ( _x ) );
+        return pi + arctan( ( -_y ) / ( _x ) );
     }else{
-        return arctan( ( -_y ) / ( _x ) );
+        return (2 * pi) + arctan( ( -_y ) / ( _x ) );
     }
 
 }else if (_y == 1){
-    return -pi/2;
+    return (3 * pi) / 2;
 }else if (_y == -1){
-    return pi/2;
+    return pi / 2;
 }else{
-      return dir;
+      return dirIn;
 }
