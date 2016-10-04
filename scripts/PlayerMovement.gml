@@ -3,14 +3,17 @@
 if ((velocityIn > (velocity/velocityMax)) && (velocity < velocityMax)){
    velocity += acceleration * velocityIn;
 }else if ((velocityIn < (velocity/velocityMax)) && (velocity > 0)){
-   velocity -= acceleration * ((velocity/velocityMax) - velocityIn);
+   velocity -= acceleration * (((velocity)/velocityMax) - velocityIn);
 }
+
+if ((velocity <= acceleration * 2) && (velocityIn == 0)) velocity = 0;
 
 //Tween Direction
 var d = dir - dirIn;
 if (d>pi) d -= 2* pi;
 var dirVel = (abs(d)*dirAccel) * (velocity/velocityMax);
 if ((d <= 2 * dirVel) && (d >= 2 * -dirVel)) dir = dirIn;
+else if (d < -pi)  dir -= dirVel;
 else if (d > 2 * dirVel)  dir -= dirVel;
 else if (d < 2 * -dirVel)dir += dirVel;
 

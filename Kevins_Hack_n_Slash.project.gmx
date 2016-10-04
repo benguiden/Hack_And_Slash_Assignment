@@ -4,8 +4,34 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
-  <sprites name="sprites"/>
+  <sounds name="sound">
+    <sound>sound\snPlayerFoot01</sound>
+    <sound>sound\snPlayerFoot02</sound>
+  </sounds>
+  <sprites name="sprites">
+    <sprites name="Player">
+      <sprites name="Running">
+        <sprite>sprites\sprPlayerRun0</sprite>
+        <sprite>sprites\sprPlayerRun1</sprite>
+        <sprite>sprites\sprPlayerRun2</sprite>
+        <sprite>sprites\sprPlayerRun3</sprite>
+        <sprite>sprites\sprPlayerRun4</sprite>
+        <sprite>sprites\sprPlayerRun5</sprite>
+        <sprite>sprites\sprPlayerRun6</sprite>
+        <sprite>sprites\sprPlayerRun7</sprite>
+      </sprites>
+      <sprites name="Stance">
+        <sprite>sprites\sprPlayerStance0</sprite>
+        <sprite>sprites\sprPlayerStance1</sprite>
+        <sprite>sprites\sprPlayerStance2</sprite>
+        <sprite>sprites\sprPlayerStance3</sprite>
+        <sprite>sprites\sprPlayerStance4</sprite>
+        <sprite>sprites\sprPlayerStance5</sprite>
+        <sprite>sprites\sprPlayerStance6</sprite>
+        <sprite>sprites\sprPlayerStance7</sprite>
+      </sprites>
+    </sprites>
+  </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
