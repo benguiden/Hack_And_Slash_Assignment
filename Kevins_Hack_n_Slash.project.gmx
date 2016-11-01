@@ -5,8 +5,19 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound">
-    <sound>sound\snPlayerFoot01</sound>
-    <sound>sound\snPlayerFoot02</sound>
+    <sounds name="Player">
+      <sound>sound\snPlayerFoot01</sound>
+      <sound>sound\snPlayerFoot02</sound>
+    </sounds>
+    <sounds name="Weapons">
+      <sounds name="Sword">
+        <sound>sound\snSwordLightMiss1</sound>
+        <sound>sound\snSwordLightMiss2</sound>
+        <sound>sound\snSwordLightMiss3</sound>
+        <sound>sound\snSwordMeat</sound>
+      </sounds>
+    </sounds>
+    <sound>sound\snMusic</sound>
   </sounds>
   <sprites name="sprites">
     <sprites name="Player">
@@ -30,18 +41,95 @@
         <sprite>sprites\sprPlayerStance6</sprite>
         <sprite>sprites\sprPlayerStance7</sprite>
       </sprites>
+      <sprites name="Attacking">
+        <sprites name="Light Right">
+          <sprite>sprites\sprPlayerLightAttackRight0</sprite>
+          <sprite>sprites\sprPlayerLightAttackRight1</sprite>
+          <sprite>sprites\sprPlayerLightAttackRight2</sprite>
+          <sprite>sprites\sprPlayerLightAttackRight3</sprite>
+          <sprite>sprites\sprPlayerLightAttackRight4</sprite>
+          <sprite>sprites\sprPlayerLightAttackRight5</sprite>
+          <sprite>sprites\sprPlayerLightAttackRight6</sprite>
+          <sprite>sprites\sprPlayerLightAttackRight7</sprite>
+        </sprites>
+        <sprites name="Light Left">
+          <sprite>sprites\sprPlayerLightAttackLeft0</sprite>
+          <sprite>sprites\sprPlayerLightAttackLeft1</sprite>
+          <sprite>sprites\sprPlayerLightAttackLeft2</sprite>
+          <sprite>sprites\sprPlayerLightAttackLeft3</sprite>
+          <sprite>sprites\sprPlayerLightAttackLeft4</sprite>
+          <sprite>sprites\sprPlayerLightAttackLeft5</sprite>
+          <sprite>sprites\sprPlayerLightAttackLeft6</sprite>
+          <sprite>sprites\sprPlayerLightAttackLeft7</sprite>
+        </sprites>
+        <sprites name="Light Down">
+          <sprite>sprites\sprPlayerLightAttackDown0</sprite>
+          <sprite>sprites\sprPlayerLightAttackDown1</sprite>
+          <sprite>sprites\sprPlayerLightAttackDown2</sprite>
+          <sprite>sprites\sprPlayerLightAttackDown3</sprite>
+          <sprite>sprites\sprPlayerLightAttackDown4</sprite>
+          <sprite>sprites\sprPlayerLightAttackDown5</sprite>
+          <sprite>sprites\sprPlayerLightAttackDown6</sprite>
+          <sprite>sprites\sprPlayerLightAttackDown7</sprite>
+        </sprites>
+        <sprites name="Light Up">
+          <sprite>sprites\sprPlayerLightAttackUp0</sprite>
+          <sprite>sprites\sprPlayerLightAttackUp1</sprite>
+          <sprite>sprites\sprPlayerLightAttackUp2</sprite>
+          <sprite>sprites\sprPlayerLightAttackUp3</sprite>
+          <sprite>sprites\sprPlayerLightAttackUp4</sprite>
+          <sprite>sprites\sprPlayerLightAttackUp5</sprite>
+          <sprite>sprites\sprPlayerLightAttackUp6</sprite>
+          <sprite>sprites\sprPlayerLightAttackUp7</sprite>
+        </sprites>
+      </sprites>
+    </sprites>
+    <sprites name="Spider">
+      <sprites name="Walk Forward">
+        <sprite>sprites\sprSpiderWalkForward0</sprite>
+        <sprite>sprites\sprSpiderWalkForward1</sprite>
+        <sprite>sprites\sprSpiderWalkForward2</sprite>
+        <sprite>sprites\sprSpiderWalkForward3</sprite>
+        <sprite>sprites\sprSpiderWalkForward4</sprite>
+        <sprite>sprites\sprSpiderWalkForward5</sprite>
+        <sprite>sprites\sprSpiderWalkForward6</sprite>
+        <sprite>sprites\sprSpiderWalkForward7</sprite>
+      </sprites>
+    </sprites>
+    <sprites name="Particles">
+      <sprite>sprites\sprBlood</sprite>
     </sprites>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\backLava</background>
+  </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\JoystickMovement.gml</script>
-    <script>scripts\JoystickInput.gml</script>
-    <script>scripts\PlayerMovement.gml</script>
+    <scripts name="Player">
+      <script>scripts\JoystickMovement.gml</script>
+      <script>scripts\PlayerMovement.gml</script>
+      <script>scripts\PlayerLightAttack.gml</script>
+      <script>scripts\PlayerWeaponCollision.gml</script>
+    </scripts>
+    <scripts name="Input">
+      <script>scripts\JoystickInput.gml</script>
+    </scripts>
+    <scripts name="Maths">
+      <script>scripts\Ease.gml</script>
+      <script>scripts\AngleBetween.gml</script>
+    </scripts>
+    <scripts name="Particles">
+      <script>scripts\BloodInit.gml</script>
+    </scripts>
   </scripts>
   <objects name="objects">
     <object>objects\objPlayer</object>
     <object>objects\objControls</object>
+    <object>objects\objView</object>
+    <object>objects\objSpider</object>
+    <object>objects\objWeaponMask</object>
+    <object>objects\objBlood</object>
+    <object>objects\objBloodSurface</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmTest</room>
