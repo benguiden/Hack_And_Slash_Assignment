@@ -89,7 +89,11 @@ else image_speed=0;
           <argument>
             <kind>1</kind>
             <string>///Kill
-if (hp &lt;= 0) instance_destroy();
+if (hp &lt;= 0){
+   BloodInit(x, y, 16, pi + AngleBetween(x, y, global.pl.x, global.pl.y), pi*0.75);
+   BitsInit(x, y, 4, pi + AngleBetween(x, y, global.pl.x, global.pl.y), pi*0.75, objSpiderBits);
+   instance_destroy();
+}
 </string>
           </argument>
         </arguments>

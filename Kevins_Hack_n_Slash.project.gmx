@@ -8,6 +8,7 @@
     <sounds name="Player">
       <sound>sound\snPlayerFoot01</sound>
       <sound>sound\snPlayerFoot02</sound>
+      <sound>sound\snPlayerPanting</sound>
     </sounds>
     <sounds name="Weapons">
       <sounds name="Sword">
@@ -15,9 +16,26 @@
         <sound>sound\snSwordLightMiss2</sound>
         <sound>sound\snSwordLightMiss3</sound>
         <sound>sound\snSwordMeat</sound>
+        <sound>sound\snSwordThump</sound>
       </sounds>
     </sounds>
-    <sound>sound\snMusic</sound>
+    <sounds name="Goat">
+      <sound>sound\snGoatScream01</sound>
+      <sound>sound\snGoatScream02</sound>
+    </sounds>
+    <sounds name="Music">
+      <sound>sound\snMusic</sound>
+    </sounds>
+    <sounds name="Gunk">
+      <sound>sound\snGunk01</sound>
+      <sound>sound\snGunk02</sound>
+      <sound>sound\snGunk03</sound>
+      <sound>sound\snGunk04</sound>
+      <sound>sound\snGunk05</sound>
+      <sound>sound\snGunk06</sound>
+      <sound>sound\snGunk07</sound>
+      <sound>sound\snGunk08</sound>
+    </sounds>
   </sounds>
   <sprites name="sprites">
     <sprites name="Player">
@@ -82,6 +100,46 @@
           <sprite>sprites\sprPlayerLightAttackUp6</sprite>
           <sprite>sprites\sprPlayerLightAttackUp7</sprite>
         </sprites>
+        <sprites name="Heavy Stab">
+          <sprite>sprites\sprPlayerHeavyStab0</sprite>
+          <sprite>sprites\sprPlayerHeavyStab1</sprite>
+          <sprite>sprites\sprPlayerHeavyStab2</sprite>
+          <sprite>sprites\sprPlayerHeavyStab3</sprite>
+          <sprite>sprites\sprPlayerHeavyStab4</sprite>
+          <sprite>sprites\sprPlayerHeavyStab5</sprite>
+          <sprite>sprites\sprPlayerHeavyStab6</sprite>
+          <sprite>sprites\sprPlayerHeavyStab7</sprite>
+        </sprites>
+        <sprites name="Heavy Twirl">
+          <sprite>sprites\sprPlayerHeavyTwirl0</sprite>
+          <sprite>sprites\sprPlayerHeavyTwirl1</sprite>
+          <sprite>sprites\sprPlayerHeavyTwirl2</sprite>
+          <sprite>sprites\sprPlayerHeavyTwirl3</sprite>
+          <sprite>sprites\sprPlayerHeavyTwirl4</sprite>
+          <sprite>sprites\sprPlayerHeavyTwirl5</sprite>
+          <sprite>sprites\sprPlayerHeavyTwirl6</sprite>
+          <sprite>sprites\sprPlayerHeavyTwirl7</sprite>
+        </sprites>
+        <sprites name="Heavy Drop">
+          <sprite>sprites\sprPlayerHeavyDrop0</sprite>
+          <sprite>sprites\sprPlayerHeavyDrop1</sprite>
+          <sprite>sprites\sprPlayerHeavyDrop2</sprite>
+          <sprite>sprites\sprPlayerHeavyDrop3</sprite>
+          <sprite>sprites\sprPlayerHeavyDrop4</sprite>
+          <sprite>sprites\sprPlayerHeavyDrop5</sprite>
+          <sprite>sprites\sprPlayerHeavyDrop6</sprite>
+          <sprite>sprites\sprPlayerHeavyDrop7</sprite>
+        </sprites>
+      </sprites>
+      <sprites name="Rolling">
+        <sprite>sprites\sprPlayerRoll0</sprite>
+        <sprite>sprites\sprPlayerRoll1</sprite>
+        <sprite>sprites\sprPlayerRoll2</sprite>
+        <sprite>sprites\sprPlayerRoll3</sprite>
+        <sprite>sprites\sprPlayerRoll4</sprite>
+        <sprite>sprites\sprPlayerRoll5</sprite>
+        <sprite>sprites\sprPlayerRoll6</sprite>
+        <sprite>sprites\sprPlayerRoll7</sprite>
       </sprites>
     </sprites>
     <sprites name="Spider">
@@ -95,9 +153,56 @@
         <sprite>sprites\sprSpiderWalkForward6</sprite>
         <sprite>sprites\sprSpiderWalkForward7</sprite>
       </sprites>
+      <sprites name="Bits">
+        <sprite>sprites\sprSpiderBitsHead</sprite>
+      </sprites>
     </sprites>
     <sprites name="Particles">
       <sprite>sprites\sprBlood</sprite>
+    </sprites>
+    <sprites name="Goat">
+      <sprites name="Stance">
+        <sprite>sprites\sprGoatStance0</sprite>
+        <sprite>sprites\sprGoatStance1</sprite>
+        <sprite>sprites\sprGoatStance2</sprite>
+        <sprite>sprites\sprGoatStance3</sprite>
+        <sprite>sprites\sprGoatStance4</sprite>
+        <sprite>sprites\sprGoatStance5</sprite>
+        <sprite>sprites\sprGoatStance6</sprite>
+        <sprite>sprites\sprGoatStance7</sprite>
+      </sprites>
+      <sprites name="Running">
+        <sprite>sprites\sprGoatRunning0</sprite>
+        <sprite>sprites\sprGoatRunning1</sprite>
+        <sprite>sprites\sprGoatRunning2</sprite>
+        <sprite>sprites\sprGoatRunning3</sprite>
+        <sprite>sprites\sprGoatRunning4</sprite>
+        <sprite>sprites\sprGoatRunning5</sprite>
+        <sprite>sprites\sprGoatRunning6</sprite>
+        <sprite>sprites\sprGoatRunning7</sprite>
+      </sprites>
+      <sprites name="Walking">
+        <sprite>sprites\sprGoatWalking0</sprite>
+        <sprite>sprites\sprGoatWalking1</sprite>
+        <sprite>sprites\sprGoatWalking2</sprite>
+        <sprite>sprites\sprGoatWalking3</sprite>
+        <sprite>sprites\sprGoatWalking4</sprite>
+        <sprite>sprites\sprGoatWalking5</sprite>
+        <sprite>sprites\sprGoatWalking6</sprite>
+        <sprite>sprites\sprGoatWalking7</sprite>
+      </sprites>
+      <sprites name="AttackSetups">
+        <sprites name="Attack01Setup">
+          <sprite>sprites\sprGoatAttack01Setup0</sprite>
+          <sprite>sprites\sprGoatAttack01Setup1</sprite>
+          <sprite>sprites\sprGoatAttack01Setup2</sprite>
+          <sprite>sprites\sprGoatAttack01Setup3</sprite>
+          <sprite>sprites\sprGoatAttack01Setup4</sprite>
+          <sprite>sprites\sprGoatAttack01Setup5</sprite>
+          <sprite>sprites\sprGoatAttack01Setup6</sprite>
+          <sprite>sprites\sprGoatAttack01Setup7</sprite>
+        </sprites>
+      </sprites>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -109,6 +214,7 @@
       <script>scripts\JoystickMovement.gml</script>
       <script>scripts\PlayerMovement.gml</script>
       <script>scripts\PlayerLightAttack.gml</script>
+      <script>scripts\PlayerHeavyAttack.gml</script>
       <script>scripts\PlayerWeaponCollision.gml</script>
     </scripts>
     <scripts name="Input">
@@ -120,6 +226,7 @@
     </scripts>
     <scripts name="Particles">
       <script>scripts\BloodInit.gml</script>
+      <script>scripts\BitsInit.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">
@@ -127,9 +234,10 @@
     <object>objects\objControls</object>
     <object>objects\objView</object>
     <object>objects\objSpider</object>
-    <object>objects\objWeaponMask</object>
     <object>objects\objBlood</object>
+    <object>objects\objSpiderBits</object>
     <object>objects\objBloodSurface</object>
+    <object>objects\objGoat</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmTest</room>

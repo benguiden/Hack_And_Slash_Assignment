@@ -51,10 +51,11 @@ alarm[0] = 60 * 5;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>alarm[0] = 60;
-var xx = -1000 + random(2000);
-var yy = -1000 + random(2000);
-instance_create(objPlayer.x + xx, objPlayer.y + yy, objSpider);
+            <string>alarm[0] = 180;
+var xx = -500 + random(1000);
+var yy = -500 + random(1000);
+instance_create(objPlayer.x + xx, objPlayer.y + yy, objGoat);
+audio_play_sound(snGunk07, 3, false);
 </string>
           </argument>
         </arguments>
@@ -80,6 +81,31 @@ instance_create(objPlayer.x + xx, objPlayer.y + yy, objSpider);
             <string>///Follow Player
 view_xview += (objectToFollow.x - (view_wview/2) - view_xview) * tweenConstant;
 view_yview += (objectToFollow.y - (view_hview/2) - view_yview) * tweenConstant;  
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw FPS
+draw_set_color(c_white);
+draw_text(8, 8, fps);
 </string>
           </argument>
         </arguments>

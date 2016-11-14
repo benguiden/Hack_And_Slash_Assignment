@@ -40,6 +40,12 @@ dirIn = 0;
 dirAccel = 0.1;
 sprDir = 0;
 
+//Rolling
+rollTimeMax = 45;
+rollTime = 0;
+rollVel = 0;
+rollVelTarget = 0;
+
 //Attacking
 attack = "LR";
 attackVel = 0
@@ -48,40 +54,12 @@ attackTime = 0;
 attackTimeTarget = 0;
 attackAngle = 0;
 attackRange = 0;
-attackAngleRange = pi / 3;
+attackAngleRange = pi / 2;
 
 //Image
 image_speed=0.5;
 drawFoot = false;
 </string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>201</id>
-        <kind>0</kind>
-        <userelative>-1</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_create_object</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>10</kind>
-            <object>objWeaponMask</object>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>x</string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>y</string>
           </argument>
         </arguments>
       </action>
@@ -126,6 +104,13 @@ else if (state == "running"){
    image_speed = 0.5 * (velocity/velocityMax);
 }
 
+//Rolling
+else if (state == "roll"){
+   sprite_index = asset_get_index("sprPlayerRoll" + string(sprDir));
+   image_speed = 0;
+   image_index = (image_number - 1) * ((rollTimeMax-rollTime)/rollTimeMax);
+}
+
 //Attacking
 else{
    
@@ -133,6 +118,9 @@ else{
    else if ((attack == "LL") || (attack == "LL2")) sprite_index = asset_get_index("sprPlayerLightAttackLeft" + string(sprDir));
    else if (attack == "LD") sprite_index = asset_get_index("sprPlayerLightAttackDown" + string(sprDir));
    else if (attack == "LU") sprite_index = asset_get_index("sprPlayerLightAttackUp" + string(sprDir));
+   else if (attack == "HS") sprite_index = asset_get_index("sprPlayerHeavyStab" + string(sprDir));
+   else if (attack == "HT") sprite_index = asset_get_index("sprPlayerHeavyTwirl" + string(sprDir));
+   else if (attack == "HD") sprite_index = asset_get_index("sprPlayerHeavyDrop" + string(sprDir));
    image_speed = 0;
 }
 </string>
@@ -164,6 +152,11 @@ if (state == "running"){
          audio_play_sound( asset_get_index("snPlayerFoot0" + string(1 + irandom(1))), 2, false);
       }
    }
+   if !(audio_is_playing(snPlayerPanting)){
+      audio_play_sound(snPlayerPanting, 3, true);
+   }
+}else{
+      audio_stop_sound(snPlayerPanting);
 }
 </string>
           </argument>
@@ -264,7 +257,11 @@ if ((state == "running") || (state == "stance")){
 
 else if (state == "attack"){
      //Attacking
-     PlayerLightAttack(false);
+     if ((attack == "LL") || (attack == "LR") || (attack == "LU") || (attack == "LD") || (attack == "LL2")){
+        PlayerLightAttack(false);
+     }else{
+        PlayerHeavyAttack(false);
+     }
 }
 
 else if (state == "attackFinish"){
@@ -274,29 +271,78 @@ else if (state == "attackFinish"){
         state = "stance";
      }
 }
+
+
+
+//Roll Init
+if ((state != "attack") &amp;&amp; (state != "roll")){
+   if (global.joy1Pressed){
+      state = "roll";
+      rollTime = rollTimeMax;
+      dir = dirIn;
+      rollVel = 4;
+      rollVelTarget = 7;
+   }
+}else if (state == "roll"){
+      rollTime --;
+      velocity = Ease("expoInOut", (rollTimeMax-rollTime), rollVel, rollVelTarget, rollTimeMax);
+      if (rollTime &lt;= 0){
+         state = "running";
+         dir = dirIn;
+      }
+}
     
 //Attack
-if ((state != "attack") &amp;&amp; (global.joy2Pressed)){
-   //Start Attack
-   if (state == "attackFinish"){
-      
-      dir = dirIn;
-   
-      if (attack == "LR") attack = "LL";
-      else if (attack == "LL") attack = "LD";
-      else if (attack == "LD") attack = "LU";
-      else if (attack == "LU") attack = "LL2";
-      else if (attack == "LL2") attack = "LR";
-   
-   }else{
-         if (attack == "LR") attack = "LL";
-         else attack = "LR";
+if ((state != "attack") &amp;&amp; (state != "roll")){
+
+    //Light Attack
+   if (global.joy2Pressed){
+       //Start Attack
+       if (state == "attackFinish"){
+       
+          if (attack == "LR") attack = "LL";
+          else if (attack == "LL") attack = "LD";
+          else if (attack == "LD") attack = "LU";
+          else if (attack == "LU") attack = "LL2";
+          else if (attack == "LL2") attack = "LR";
+       
+       }else{
+             if (attack == "LR") attack = "LL";
+             else attack = "LR";
+       }
+       
+       if ((attack != "HS") and (attack != "HT") and (attack != "HD")){
+          dir = dirIn;
+       
+           PlayerLightAttack(true);
+           
+           //Play Sound
+           audio_play_sound(asset_get_index("snSwordLightMiss" + string(1 + irandom(2))), 7, false);
+       }
    }
    
-   PlayerLightAttack(true);
-   
-   //Play Sound
-   audio_play_sound(asset_get_index("snSwordLightMiss" + string(1 + irandom(2))), 7, false);
+   //Heavy Attack
+   else if (global.joy3Pressed){ //Heavy
+       //Start Attack
+       if (state == "attackFinish"){
+          
+          dir = dirIn;
+       
+          if (attack == "LR") attack = "HS";
+          else if (attack == "LL") attack = "HT";
+          else if (attack == "LD") attack = "HD";
+          else if (attack == "LU") attack = "HS";
+          else if (attack == "LL2") attack = "HT";
+       
+       }else{
+             attack = "HT";
+       }
+       
+       PlayerHeavyAttack(true);
+       
+       //Play Sound
+       audio_play_sound(asset_get_index("snSwordLightMiss" + string(1 + irandom(2))), 7, false);
+   }
 }
 
 </string>
@@ -345,44 +391,11 @@ if (state == "attack"){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*//Draw DEBUG
-//Player
-draw_set_color(c_blue);
-draw_circle(x, y, 8, false);
-draw_set_color(c_black);
-draw_line_width(x, y, x+(8 *cos(dir)), y+(8 *-sin(dir)), 3);
-
-//Joystick
-if (joystick_exists(1)){
-    draw_text(16, 16, "velocity = " + string(velocity));
-    draw_text(16, 32, "direction = " + string(dir));
-    draw_text(16, 48, "direction In = " + string(dirIn));
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///Draw Self
-//draw_self();
-/*draw_set_color(c_blue);
-draw_line_with(x, y, x + (attackRange * cos(dir + attackAngle)), y + (attackRange * -sin(dir + attackAngle)), 8);
-*/
+
+//draw_set_color(c_blue);
+//draw_line_width(x, y, x + (attackRange * cos(dir + attackAngle)), y + (attackRange * -sin(dir + attackAngle)), 8);
+
 
 //Draw Foot steps on blood
 if (state == "running"){
@@ -400,6 +413,38 @@ if (state == "running"){
 }
 
 draw_self();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw DEBUG
+/*/Player
+draw_set_color(c_blue);
+draw_circle(x, y, 8, false);
+draw_set_color(c_black);
+draw_line_width(x, y, x+(8 *cos(dir)), y+(8 *-sin(dir)), 3);
+
+
+draw_set_color(c_white);
+draw_text(16, 32, "Attack Type = " + string(attack));
 </string>
           </argument>
         </arguments>
